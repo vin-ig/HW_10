@@ -19,14 +19,15 @@ def page_index():
 @app.route('/candidate/<name>')
 def page_profile(name):
     """Страница с данными кандидата"""
+    flag = False
     result = '<pre>\n'
     for candidate in candidates:
-        if candidate.get('name').lower() == name.lower():  # Ищем совпадение по имени
+        if name.lower() in candidate.get('name').lower():  # Ищем совпадение по имени
             result += f"<img src='{candidate.get('picture')}'>\n\n" \
                       f"Имя кандидата: {candidate.get('name')}\nПозиция кандидата: {candidate.get('position')}\n" \
                       f"Навыки: {candidate.get('skills')}\n\n"
-            break
-    else:
+            flag = True
+    if not flag:
         result += 'Кандидат не найден'
     result += '</pre>'
 
