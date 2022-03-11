@@ -1,7 +1,8 @@
 from flask import Flask
 import json
 
-app = Flask(__name__)
+if __name__ == '__main__':
+    app = Flask(__name__)
 
 
 @app.route('/')
@@ -40,7 +41,8 @@ def page_skill(skill):
     flag = False
     result = '<pre>\n'
     for candidate in candidates:
-        if skill.lower() in candidate.get('skills').lower():  # Ищем совпадение по навыкам
+        skills = [elem.lower() for elem in candidate.get('skills').split(', ')]
+        if skill.lower() in skills:  # Ищем совпадение по навыкам
             result += f"Имя кандидата: {candidate.get('name')}\nПозиция кандидата: {candidate.get('position')}\n" \
                       f"Навыки: {candidate.get('skills')}\n\n"
             flag = True
