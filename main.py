@@ -1,8 +1,7 @@
 from flask import Flask
 import json
 
-if __name__ == '__main__':
-    app = Flask(__name__)
+app = Flask(__name__)
 
 
 @app.route('/')
@@ -56,4 +55,5 @@ def page_skill(skill):
 with open('candidates.json', encoding='utf-8') as file:
     candidates = json.load(file)
 
-app.run()
+if __name__ == '__main__':
+    app.run()
